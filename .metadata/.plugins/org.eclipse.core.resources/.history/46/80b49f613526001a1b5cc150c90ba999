@@ -1,0 +1,45 @@
+package com.iclique.crudfull.controler;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.iclique.crudfull.model.User;
+import com.iclique.crudfull.userDAO.UserDAO;
+
+/**
+ * Servlet implementation class EditServlet
+ */
+public class EditServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			editUser(request, response);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private void editUser(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		User user = UserDAO.getUser(id);
+		RequestDispatcher rd = request.getRequestDispatcher("edit-form.jsp");
+		request.setAttribute("user", user);
+		rd.forward(request, response);
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}
