@@ -11,7 +11,6 @@
 if(session.getAttribute("admin_name") == null) {
 	response.sendRedirect("login.jsp");
 }
-
 %>
 <div align="right" style="margin:20px 700px ">
 		<form action="HomeServlet?action=logout" method="post">

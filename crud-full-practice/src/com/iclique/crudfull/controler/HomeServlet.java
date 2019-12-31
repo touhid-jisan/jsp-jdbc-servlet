@@ -1,7 +1,6 @@
 package com.iclique.crudfull.controler;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.iclique.crudfull.model.User;
+import com.iclique.crudfull.userDAO.AdminDAO;
 import com.iclique.crudfull.userDAO.UserDAO;
 
 /**
@@ -73,19 +73,32 @@ public class HomeServlet extends HttpServlet {
 		
 	}
 
-	private void adminLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void adminLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
 		String admin_name = request.getParameter("admin_name");
 		String admin_pass = request.getParameter("admin_pass");
 		
-		if(admin_name.equals("touhid") && admin_pass.equals("jisan") ) {
+		
+		boolean flag = AdminDAO.checkAdmin(admin_name, admin_pass);
+		if(flag) {
 			HttpSession session = request.getSession();
 			session.setAttribute("admin_name", admin_name);
 			
 			response.sendRedirect("home.jsp");
-		} else {
-			
+		}
+		else {	
 			response.sendRedirect("login.jsp");
 		}
+		
+		
+//		if(admin_name.equals("touhid") && admin_pass.equals("jisan") ) {
+//			HttpSession session = request.getSession();
+//			session.setAttribute("admin_name", admin_name);
+//			
+//			response.sendRedirect("home.jsp");
+//		} else {
+//			
+//			response.sendRedirect("login.jsp");
+//		}
 		
 	}
 
@@ -96,13 +109,12 @@ public class HomeServlet extends HttpServlet {
 
 	 void showUsers(HttpServletRequest request, HttpServletResponse response)
 			throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
+		 
 		List<User> showAllUsers = UserDAO.showAllUser();
 		request.setAttribute("showAllUsers", showAllUsers);
 
 	}
 	 private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, IOException {
-			// TODO Auto-generated method stub
 		 
 			int id = Integer.parseInt(request.getParameter("id"));
 		
@@ -119,10 +131,6 @@ public class HomeServlet extends HttpServlet {
 			User new_user = new User(name, email, country, contact, address);
 			UserDAO.inserUserDB(new_user);
 			response.sendRedirect("/crud-full-practice/home.jsp");
-			
-			//RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
-			//System.out.println("forwarding to home jsp");
-			//rd.forward(request, response);
 			
 		}
 	 private void getUser(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException, ServletException, IOException {
@@ -141,9 +149,6 @@ public class HomeServlet extends HttpServlet {
 			int contact = Integer.parseInt(request.getParameter("contact"));
 			String address = request.getParameter("address");
 			
-			//String sql = "Update users SET 	name = ?, email= ?, country= ?, contact= ?, address=? where id=?";
-			
-			//PreparedStatement statement = 
 			User update_user = new User(id, name, email, country, contact, address);
 			UserDAO.updateUser(update_user);
 			response.sendRedirect("/crud-full-practice/home.jsp");

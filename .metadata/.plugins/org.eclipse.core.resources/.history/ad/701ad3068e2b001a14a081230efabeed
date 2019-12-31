@@ -1,0 +1,17 @@
+package com.iclique.crudfull.userDAO;
+
+
+import java.sql.SQLException;
+
+import com.mysql.jdbc.PreparedStatement;
+
+public class AdminDAO {
+
+	public static boolean checkAdmin(String admin_name, String admin_pass) throws ClassNotFoundException, SQLException {
+		UserDAO.connection();
+		
+		String sql = "SELECT * FROM admin WHERE admin_name = ?, admin_pass = ?";
+		PreparedStatement statement = UserDAO.jdbcConnection.prepareStatement(sql);
+	}
+	
+}

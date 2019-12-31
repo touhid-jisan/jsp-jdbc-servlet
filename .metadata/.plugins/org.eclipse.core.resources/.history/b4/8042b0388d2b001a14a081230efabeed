@@ -1,0 +1,5 @@
+package com.iclique.crudfull.userDAO;
+
+public class AdminDAO {
+	
+}
