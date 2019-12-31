@@ -29,7 +29,6 @@ INDEX VERSION 1.131+C:\Users\Administrator\Desktop\touhid\.metadata\.plugins\org
 178093915.index
 3842089072.index
 3404349100.index
-607624725.index
 2915132303.index
 54301548.index
 1272978651.index
