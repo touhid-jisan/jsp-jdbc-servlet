@@ -1,9 +1,0 @@
-package com.iclique.crudfull.userDAO;
-
-public class AdminDAO {
-
-	public AdminDAO() {
-		// TODO Auto-generated constructor stub
-	}
-
-}

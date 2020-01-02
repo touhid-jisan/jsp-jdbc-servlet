@@ -15,9 +15,12 @@
 		response.sendRedirect("login.jsp");
 	}
 	
+	List<User> allUserData = UserDAO.showAllUser();
+	request.setAttribute("showAllUsers", allUserData);
 	
-		List<User> allUserData = UserDAO.showAllUser();
-		request.setAttribute("showAllUsers", allUserData);
+	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+	response.setHeader("Progma", "no-cache");
+	response.setHeader("Expires" , "0");
 	%>
 	<div align="center">
 		<a href="add-user.jsp">Add User</a> <br>

@@ -28,14 +28,13 @@ public class HomeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		System.out.println(action);
+		//System.out.println(action);
 		try {
 			switch(action) {
 			case "insert": 
 				insertUser(request, response);
 				break;
-			case "delete": 
-				System.out.print(action);
+			case "delete":
 				deleteUser(request, response);
 				break;
 			case "getuser" :
@@ -59,11 +58,7 @@ public class HomeServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
-		
 	}
-
-	
-
 	private void adminLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		HttpSession session = request.getSession();
@@ -87,8 +82,7 @@ public class HomeServlet extends HttpServlet {
 		}
 		else {	
 			response.sendRedirect("login.jsp");
-		}
-		
+		}		
 		
 //		if(admin_name.equals("touhid") && admin_pass.equals("jisan") ) {
 //			HttpSession session = request.getSession();

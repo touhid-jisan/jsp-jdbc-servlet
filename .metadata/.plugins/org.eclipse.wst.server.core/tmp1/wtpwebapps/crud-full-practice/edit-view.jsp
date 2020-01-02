@@ -18,6 +18,9 @@
 if(session.getAttribute("admin_name") == null) {
 	response.sendRedirect("login.jsp");
 }
+response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+response.setHeader("Progma", "no-cache");
+response.setHeader("Expires" , "0");
 %>
 
 <div align="right" style="margin:20px 650px ">

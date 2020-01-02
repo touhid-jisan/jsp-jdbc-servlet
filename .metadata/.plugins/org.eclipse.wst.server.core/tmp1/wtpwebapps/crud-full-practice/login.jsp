@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body align="center">
+<% 
+if(session.getAttribute("admin_name") != null) {
+	response.sendRedirect("home.jsp");
+}
+%>
 
 <h2>Admin login</h2>
 <form action="HomeServlet?action=login" method="post">
@@ -14,7 +19,5 @@
 	Admin Pass  : <input type="password" name="admin_pass"><br><br>
 	<input type="submit" value="Submit">
 </form>
-
-
 </body>
 </html>

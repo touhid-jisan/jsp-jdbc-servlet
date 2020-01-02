@@ -83,11 +83,8 @@ public class UserDAO {
 		// TODO Auto-generated method stub
 		String sql = "DELETE FROM users WHERE id=?";
 		connection();
-		//System.out.println("check2");
 		PreparedStatement  statement = jdbcConnection.prepareStatement(sql);	
-		//System.out.println("check2");
 		statement.setInt(1, id);
-		//System.out.println("check2");
 		boolean flag = statement.executeUpdate() > 0;
 		if(flag) {
 			System.out.println(flag);
@@ -95,11 +92,10 @@ public class UserDAO {
 			System.out.println(flag);
 		}
 		disconnect();
-		
 	}
 
 	public static User getUser(int id) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
+
 		String sql = "SELECT * FROM users WHERE id=?";
 		connection();
 		System.out.println("in get User method" + id);
@@ -114,10 +110,8 @@ public class UserDAO {
 			String country = result.getString("country");
 			int contact = result.getInt("contact");
 			String address = result.getString("address");
-		
 			user = new User(id, name, email, country, contact, address);
 		}
-		System.out.println("in get User method" + id);
 		return user;
 		
 	}
